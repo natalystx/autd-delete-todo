@@ -54,12 +54,16 @@ export const useViewModel = () => {
   };
 
   useEffect(() => {
-    queue.subscribe<Todo>(({ type, data }) => {
+    const { unsubscribe } = queue.subscribe<Todo>(({ type, data }) => {
       if (type === "remove") {
         updateType({ action: "remove", data, type: data.type });
         onRemove(data);
       }
     });
+
+    return () => {
+      unsubscribe();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

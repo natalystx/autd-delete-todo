@@ -31,6 +31,8 @@ export default class Queue {
 
   subscribe<T>(fn: (event: { type: string; data: T }) => void) {
     this._subscriber.add(fn);
+
+    return { unsubscribe: () => this._subscriber.delete(fn) };
   }
 
   private _clearQueue() {

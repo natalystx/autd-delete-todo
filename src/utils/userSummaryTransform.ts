@@ -81,7 +81,9 @@ export const userSummaryTransform = (data: UserDto[]): FormattedUserData => {
       formattedData[user.company.department] = {
         male: user.gender === "male" ? 1 : 0,
         female: user.gender !== "male" ? 1 : 0,
-        ageRange: `${ages[department][0]}-${ages[department][1]}`,
+        ageRange: `${ages[department][0]}${
+          ages[department][1] > 0 ? `${ages[department][1]}` : ""
+        }`,
         hair: { ...hairs[department] },
         addressUser: { ...userAddress[department] },
       };
