@@ -69,6 +69,7 @@ export const useViewModel = () => {
 
   const moveTo = (todo: Todo, action: "add" | "remove") => {
     if (action === "add") {
+      queue.add(todo.name, { type: "remove", data: todo });
       updateType({ action: "add", data: todo, type: todo.type });
       setTodoList((prev) => {
         const temp = prev.filter((item) => item.name !== todo.name);
@@ -76,7 +77,6 @@ export const useViewModel = () => {
 
         return temp;
       });
-      queue.add(todo.name, { type: "remove", data: todo });
     } else {
       queue.pop(todo.name);
     }

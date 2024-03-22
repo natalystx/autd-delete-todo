@@ -5,11 +5,13 @@ type DataColumnProps = {
   title?: string;
   className?: string;
   children: React.ReactNode;
+  id?: string;
 };
 
-const DataColumn = ({ title, className, children }: DataColumnProps) => {
+const DataColumn = ({ title, className, children, id }: DataColumnProps) => {
   return (
     <div
+      id={id}
       className={cn(
         "flex flex-col gap-y-6 border border-neutral-200 shadow h-full p-2",
         className

@@ -1,7 +1,9 @@
 import React from "react";
 import { cn } from "../../utils/cn";
 
-type ButtonProps = { children: React.ReactNode } & React.DetailedHTMLProps<
+type ButtonProps = {
+  children: React.ReactNode;
+} & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;

@@ -5,7 +5,7 @@ export default class Queue {
   private _timeInterval: number;
   private _intervalRef: number | undefined = undefined;
   private _subscriber = new Set<(event: { type: string; data: any }) => void>();
-  private _baseInterval = 1000;
+  private _baseInterval = 60;
 
   constructor(timeInterval: number) {
     this._timeInterval = timeInterval;
@@ -49,7 +49,8 @@ export default class Queue {
       this._intervalRef = setInterval(() => {
         const payload = this._tasks.get(this._queue[0]);
         const diffTime = (payload?.time || 0) - Date.now();
-        if (diffTime <= 0) {
+
+        if (diffTime <= 200) {
           if (this._queue.length === 1) {
             this._clearQueue();
           }

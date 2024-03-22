@@ -8,9 +8,11 @@ const HomePage = () => {
   return (
     <div>
       <div className="w-screen min-h-[inherit] h-full overflow-x-hidden flex justify-between p-12">
-        <DataColumn className="border-none shadow-none w-[300px]">
+        <div data-testid={`apple-og-list`} />
+        <DataColumn className="border-none shadow-none w-[300px]" id="og-list">
           {todoList.map((todo) => (
             <Button
+              data-testid={`${todo.name}-og-list`}
               key={`todo-${todo.name}`}
               onClick={() => moveTo(todo, "add")}
             >
@@ -26,6 +28,7 @@ const HomePage = () => {
           >
             {todosInType?.[type]?.map((item) => (
               <Button
+                data-testid={`${item.name}-${type}-list`}
                 key={`todoInType-${item.name}`}
                 onClick={() => moveTo(item, "remove")}
               >
