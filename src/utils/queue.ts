@@ -3,7 +3,7 @@ export default class Queue {
   private _queue: string[] = [];
   private _tasks = new Map<string, { type: string; data: any; time: number }>();
   private _timeInterval: number;
-  private _intervalRef: number | undefined = undefined;
+  private _intervalRef: NodeJS.Timeout | undefined = undefined;
   private _subscriber = new Set<(event: { type: string; data: any }) => void>();
   private _baseInterval = 60;
 
@@ -50,7 +50,7 @@ export default class Queue {
         const payload = this._tasks.get(this._queue[0]);
         const diffTime = (payload?.time || 0) - Date.now();
 
-        if (diffTime <= 200) {
+        if (diffTime <= 60) {
           if (this._queue.length === 1) {
             this._clearQueue();
           }
